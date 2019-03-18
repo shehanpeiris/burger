@@ -3,31 +3,34 @@ var connection = require("./connection.js");
 
 // Object Relational Mapper (ORM)
 var orm = {
-  selectAll: function() {
+  selectAll: function(tableInput, cb) {
     // MySQL query to retrieve all data from burgers table
-    var queryString = "SELECT * FROM burgers";
-    connection.query(queryString, function(err, result) {
+    var queryString = "SELECT * FROM ??;";
+    connection.query(queryString, [tableInput], function(err, result) {
       if (err) throw err;
       console.log(result, "\n-------------------");
+      cb(result);
     });
   },
-  insertOne: function(burgerName) {
+  insertOne: function(table, val, cb) {
     // MySQL query to add a new burger to the burgers table
-    var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?, false)";
+    var queryString = "INSERT INTO ?? (burger_name, devoured) VALUES (?, false)";
     console.log(queryString);
-    connection.query(queryString, [burgerName], function(err, result) {
+    connection.query(queryString, [table, val], function(err, result) {
       if (err) throw err;
       console.log(result, "\n-------------------");
+      cb(result);
     });
   },
-  updateOne: function(isDevoured, burgerName) {
+  updateOne: function(table, isDevoured, burgerName, cb) {
     // MySQL query to update the devoured boolean for an existing burger
-    var queryString = "UPDATE burgers SET devoured = ? where burger_name = ?";
+    var queryString = "UPDATE ?? SET devoured = ? where burger_name = ?";
     console.log(queryString);
     connection.query(
-      queryString, [isDevoured, burgerName], function(err, result) {
+      queryString, [table, isDevoured, burgerName], function(err, result) {
         if (err) throw err;
         console.log(result, "\n-------------------");
+        cb(result);
       }
     );
   }

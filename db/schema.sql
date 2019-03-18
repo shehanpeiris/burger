@@ -5,9 +5,9 @@ USE burgers_db;
 
 -- Create table for app data detailing burger characteristics -- 
 CREATE TABLE burgers (
-	id INT( 11 ) AUTO_INCREMENT NOT NULL,
+	id INT AUTO_INCREMENT NOT NULL,
 	burger_name VARCHAR(255) NOT NULL,
-	devoured BOOLEAN NOT NULL,
+	devoured BOOLEAN DEFAULT false,
 	--  Set ID as primary key --
 	PRIMARY KEY (id)
 );
