@@ -8,7 +8,7 @@ var orm = {
     var queryString = "SELECT * FROM ??;";
     connection.query(queryString, [tableInput], function(err, result) {
       if (err) throw err;
-      console.log(result, "\n-------------------");
+      console.log("Testing selectAll result", result);
       cb(result);
     });
   },
@@ -22,12 +22,12 @@ var orm = {
       cb(result);
     });
   },
-  updateOne: function(table, isDevoured, burgerName, cb) {
+  updateOne: function(table, isDevoured, id, cb) {
     // MySQL query to update the devoured boolean for an existing burger
-    var queryString = "UPDATE ?? SET devoured = ? where burger_name = ?";
+    var queryString = "UPDATE ?? SET devoured = ? WHERE id = ?";
     console.log(queryString);
     connection.query(
-      queryString, [table, isDevoured, burgerName], function(err, result) {
+      queryString, [table, isDevoured, id], function(err, result) {
         if (err) throw err;
         console.log(result, "\n-------------------");
         cb(result);
